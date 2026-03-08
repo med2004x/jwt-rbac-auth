@@ -22,7 +22,7 @@ The component topology and runtime flows are documented in [`docs/diagrams/archi
 - PostgreSQL 16
 - Redis 7
 - PyJWT 2.10
-- passlib[bcrypt] 1.7
+- PBKDF2-SHA256 via Python stdlib
 
 ## How It Works
 `POST /auth/register` creates a user with a hashed password and the default `member` role. `POST /auth/login` verifies credentials, issues an access token and refresh token pair, and registers the refresh token identifier in Redis. `POST /auth/refresh` rotates the refresh token by revoking the old identifier and minting a fresh pair. `POST /admin/users/{user_id}/role` is guarded by the admin role and emits an audit event into Redis using a background task.
@@ -76,4 +76,3 @@ The tests cover token rotation and admin role assignment with audit event public
 
 ## License
 MIT
-

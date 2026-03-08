@@ -10,8 +10,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-    ports:
-      - "54329:5432"
 
   redis:
     image: redis:7-alpine
@@ -21,8 +19,6 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
-    ports:
-      - "63799:6379"
 
   api:
     build:
@@ -36,4 +32,3 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
-
