@@ -1,0 +1,9 @@
+graph TD
+    Client --> FastAPI
+    FastAPI --> Middleware
+    Middleware --> AuthService
+    AuthService --> PostgreSQL
+    AuthService --> Redis
+    AuthService --> BackgroundAuditPublisher
+    BackgroundAuditPublisher --> Redis
+

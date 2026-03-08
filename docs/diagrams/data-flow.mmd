@@ -1,0 +1,7 @@
+flowchart LR
+    Credentials --> PasswordVerification
+    PasswordVerification --> UserLookup
+    UserLookup --> TokenMinting
+    TokenMinting --> RefreshStateStore
+    RefreshStateStore --> APIResponse
+

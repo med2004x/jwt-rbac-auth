@@ -1,0 +1,8 @@
+sequenceDiagram
+    Client->>FastAPI: POST /auth/refresh
+    FastAPI->>AuthMiddleware: Parse bearer token if present
+    FastAPI->>AuthService: Validate refresh token
+    AuthService->>Redis: Check active refresh jti
+    AuthService->>Redis: Revoke old jti and store new jti
+    AuthService-->>Client: Return rotated token pair
+

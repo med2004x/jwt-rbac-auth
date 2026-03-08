@@ -1,0 +1,38 @@
+### Health
+GET http://localhost:8080/healthz
+
+### Register
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "email": "operator@example.com",
+  "password": "LocalPass123!"
+}
+
+### Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "AdminPass123!"
+}
+
+### Refresh
+POST http://localhost:8080/auth/refresh
+Content-Type: application/json
+
+{
+  "refresh_token": "paste-refresh-token-here"
+}
+
+### Assign role
+POST http://localhost:8080/admin/users/2/role
+Authorization: Bearer paste-access-token-here
+Content-Type: application/json
+
+{
+  "role": "support"
+}
+
