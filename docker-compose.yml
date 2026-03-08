@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: auth_service
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U auth_user -d auth_service"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "54329:5432"
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    ports:
+      - "63799:6379"
+
+  api:
+    build:
+      context: .
+    env_file:
+      - .env.example
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
